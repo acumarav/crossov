@@ -6,7 +6,7 @@ package com.crossover.trial.properties.alext.parser;
 public class Property<T> {
 
     private final String name;
-    private T value;
+    private final T value;
 
     public Property(String name, T value) {
         this.name = name;
