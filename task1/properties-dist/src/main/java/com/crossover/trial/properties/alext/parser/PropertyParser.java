@@ -1,7 +1,6 @@
 package com.crossover.trial.properties.alext.parser;
 
-import com.amazonaws.regions.Region;
-import com.crossover.trial.properties.alext.parser.converts.Validator;
+import com.crossover.trial.properties.alext.parser.converts.Converter;
 
 import java.util.List;
 
@@ -10,16 +9,31 @@ import java.util.List;
  */
 public class PropertyParser {
 
+    private final Converter[] converters;
 
-    private final Validator[] validators;
+    public PropertyParser(Converter... converters) {
 
-    public PropertyParser( Validator[] validators) {
-
-        this.validators = validators;
+        this.converters = converters;
     }
 
-    Property<?> parseProperty(String name, List<String> values){
-        //Enum.valueOf()
-        return null;
+    Property parseProperty(String name, List<String> values) {
+
+        converter:
+        for (Converter converter : converters) {
+
+            for (String value : values) {
+                if (!converter.isValidValue(value)) {
+                    continue converter;
+                }
+            }
+            Class supportedType = converter.getSupportedType();
+            Object lastValue = converter.parseValue(values.get(values.size() - 1));
+            return new Property(name, lastValue, supportedType);
+
+        }
+
+        //By Default any property can be string
+        return new Property(name, values.get(values.size() - 1), String.class);
+
     }
 }
