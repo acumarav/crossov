@@ -26,8 +26,8 @@ public class IntegerConverterTest {
         assertEquals((Integer) 34, parser.parseValue("t", "+34").getValue());
     }
 
-    @Test
+   /* @Test
     public void testGetSupportedType() throws Exception {
         assertEquals(Integer.class, parser.getSupportedType());
-    }
+    }*/
 }

@@ -14,10 +14,7 @@ public class EnumValidatorTest {
     private EnumPropertyParser enumParser = new EnumPropertyParser(Regions.class);
     private AwsRegionsPropertyParser awsRegionParser = new AwsRegionsPropertyParser();
 
-    @Test
-    public void testGetSupportedClass() throws Exception {
-        assertEquals(Regions.class, enumParser.getClass().getGenericSuperclass());
-    }
+
 
     @Test
     public void testParseExistingEnumMemberQ() {

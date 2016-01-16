@@ -26,7 +26,7 @@ public class AwsRegionsPropertyParser implements PropertyParser<Regions> {
         Preconditions.checkArgument(isValidValue(value));
 
         Regions regions = Regions.fromName(value);
-        return new Property<Regions>(name,regions);
+        return new Property<Regions>(name,regions, value);
 
     }
 

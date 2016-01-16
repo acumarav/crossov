@@ -23,7 +23,7 @@ public class BooleanPropertyParser implements PropertyParser<Boolean> {
         Preconditions.checkArgument(isValidValue(value));
 
         Boolean val = Boolean.valueOf(name);
-        return new Property<Boolean>(name, val);
+        return new Property<Boolean>(name, val, value);
     }
 
 }

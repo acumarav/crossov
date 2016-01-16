@@ -40,7 +40,7 @@ public class EnumPropertyParser implements PropertyParser<Enum> {
 
         Enum member = findEnumMemberByName(value);
 
-        return new Property<Enum>(name, member);
+        return new Property<Enum>(name, member, value);
     }
 
     private Enum findEnumMemberByName(String name) {
@@ -53,14 +53,6 @@ public class EnumPropertyParser implements PropertyParser<Enum> {
         return null;
     }
 
-    /*private static <T extends Enum<T>> T getEnumFromString(Class<T> c, String string) {
-        if (c != null && string != null) {
-            try {
-                return Enum.valueOf(c, string.trim());
-            } catch (IllegalArgumentException ex) {
-            }
-        }
-        return null;
-    }*/
+
 
 }

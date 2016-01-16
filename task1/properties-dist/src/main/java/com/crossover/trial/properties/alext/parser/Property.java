@@ -7,11 +7,12 @@ public class Property<T> {
 
     private final String name;
     private final T value;
-    //private final Class propertyType;
+    private final String originalValue;
 
-    public Property(String name, T value) {
+    public Property(String name, T value, String originalValue) {
         this.name = name;
         this.value = value;
+        this.originalValue = originalValue;
     }
 
     public String getName() {
@@ -20,6 +21,10 @@ public class Property<T> {
 
     public T getValue() {
         return value;
+    }
+
+    public String getOriginalValue() {
+        return originalValue;
     }
 
     @Override
@@ -43,6 +48,6 @@ public class Property<T> {
     }
 
     public Class<?> getPropertyType() {
-        return getClass().getGenericSuperclass().getClass();
+        return value.getClass();
     }
 }

@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  */
 public class PropertyMatcherTest {
 
-    private PropertyMatcher parser=new PropertyMatcher(new AwsRegionsPropertyParser(), new BooleanPropertyParser());
+    private PropertyMatcherImpl parser=new PropertyMatcherImpl(new AwsRegionsPropertyParser(), new BooleanPropertyParser());
 
     @Test
     public void testParseBoolOrStringProperty() throws Exception {
@@ -43,7 +43,7 @@ public class PropertyMatcherTest {
         assertNotNull(awsProperty);
         assertEquals(Regions.class, awsProperty.getPropertyType());
         assertEquals("awsRegion", awsProperty.getName());
-        assertEquals("cn-north-1", awsProperty.getValue());
+        assertEquals("cn-north-1", awsProperty.getOriginalValue());
 
         assertNotNull(fakeAwsProperty);
         assertEquals(String.class, fakeAwsProperty.getPropertyType());

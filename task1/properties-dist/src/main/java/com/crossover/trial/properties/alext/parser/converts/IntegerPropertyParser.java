@@ -26,7 +26,7 @@ public class IntegerPropertyParser implements PropertyParser<Integer> {
         Preconditions.checkArgument(isValidValue(value));
 
         Integer val = Integer.valueOf(StringUtils.trim(value));
-        return new Property<Integer>(name, val);
+        return new Property<Integer>(name, val, value);
     }
 
 

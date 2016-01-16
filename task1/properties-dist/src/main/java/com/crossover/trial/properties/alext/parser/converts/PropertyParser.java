@@ -10,9 +10,4 @@ public interface PropertyParser<T> {
     boolean isValidValue(String value);
 
     Property<T> parseValue(String name, String value);
-
-    default Class<?> getSupportedType() {
-        return Class<T>;
-        //return getClass().getGenericSuperclass().getClass();
-    }
 }
