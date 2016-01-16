@@ -11,32 +11,32 @@ import static org.junit.Assert.assertTrue;
  */
 public class EnumValidatorTest {
 
-    private EnumConverter enumValidator = new EnumConverter(Regions.class);
-    private AwsRegionsConverter awsRegionValidator = new AwsRegionsConverter();
+    private EnumPropertyParser enumParser = new EnumPropertyParser(Regions.class);
+    private AwsRegionsPropertyParser awsRegionParser = new AwsRegionsPropertyParser();
 
     @Test
     public void testGetSupportedClass() throws Exception {
-        assertEquals(Regions.class, enumValidator.getSupportedType());
+        assertEquals(Regions.class, enumParser.getClass().getGenericSuperclass());
     }
 
     @Test
     public void testParseExistingEnumMemberQ() {
-        assertTrue(enumValidator.isValidValue("AP_NORTHEAST_2"));
+        assertTrue(enumParser.isValidValue("AP_NORTHEAST_2"));
     }
 
     @Test
     public void testParseExistingEnumMember() {
-        assertTrue(awsRegionValidator.isValidValue("us-gov-west-1"));
-        assertTrue(awsRegionValidator.isValidValue("us-east-1"));
-        assertTrue(awsRegionValidator.isValidValue("us-west-1"));
-        assertTrue(awsRegionValidator.isValidValue("us-west-2"));
-        assertTrue(awsRegionValidator.isValidValue("eu-west-1"));
-        assertTrue(awsRegionValidator.isValidValue("eu-central-1"));
-        assertTrue(awsRegionValidator.isValidValue("ap-southeast-1"));
-        assertTrue(awsRegionValidator.isValidValue("ap-southeast-2"));
-        assertTrue(awsRegionValidator.isValidValue("ap-northeast-1"));
-        assertTrue(awsRegionValidator.isValidValue("ap-northeast-2"));
-        assertTrue(awsRegionValidator.isValidValue("sa-east-1"));
-        assertTrue(awsRegionValidator.isValidValue("cn-north-1"));
+        assertTrue(awsRegionParser.isValidValue("us-gov-west-1"));
+        assertTrue(awsRegionParser.isValidValue("us-east-1"));
+        assertTrue(awsRegionParser.isValidValue("us-west-1"));
+        assertTrue(awsRegionParser.isValidValue("us-west-2"));
+        assertTrue(awsRegionParser.isValidValue("eu-west-1"));
+        assertTrue(awsRegionParser.isValidValue("eu-central-1"));
+        assertTrue(awsRegionParser.isValidValue("ap-southeast-1"));
+        assertTrue(awsRegionParser.isValidValue("ap-southeast-2"));
+        assertTrue(awsRegionParser.isValidValue("ap-northeast-1"));
+        assertTrue(awsRegionParser.isValidValue("ap-northeast-2"));
+        assertTrue(awsRegionParser.isValidValue("sa-east-1"));
+        assertTrue(awsRegionParser.isValidValue("cn-north-1"));
     }
 }

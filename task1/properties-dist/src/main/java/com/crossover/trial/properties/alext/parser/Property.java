@@ -1,60 +1,48 @@
 package com.crossover.trial.properties.alext.parser;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import java.util.Objects;
-import java.util.Properties;
-
 /**
  * Created by alex on 1/14/2016.
  */
-public class Property {
+public class Property<T> {
 
     private final String name;
-    private final Object value;
-    private final Class propertyType;
+    private final T value;
+    //private final Class propertyType;
 
-    public Property(String name, Object value, Class propertyType) {
+    public Property(String name, T value) {
         this.name = name;
         this.value = value;
-        this.propertyType = propertyType;
     }
-
 
     public String getName() {
         return name;
     }
 
-    public Object getValue() {
+    public T getValue() {
         return value;
-    }
-
-    public Class getPropertyType() {
-        return propertyType;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-
         if (o == null || getClass() != o.getClass()) return false;
 
         Property property = (Property) o;
 
-        return new EqualsBuilder()
-                .append(name, property.name)
-                .append(value, property.value)
-                .append(propertyType, property.propertyType)
-                .isEquals();
+        if (name != null ? !name.equals(property.name) : property.name != null) return false;
+        if (value != null ? !value.equals(property.value) : property.value != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(name)
-                .append(value)
-                .append(propertyType)
-                .toHashCode();
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        return result;
+    }
+
+    public Class<?> getPropertyType() {
+        return getClass().getGenericSuperclass().getClass();
     }
 }

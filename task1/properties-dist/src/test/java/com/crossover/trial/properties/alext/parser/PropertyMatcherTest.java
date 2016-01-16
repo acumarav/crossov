@@ -1,8 +1,8 @@
 package com.crossover.trial.properties.alext.parser;
 
 import com.amazonaws.regions.Regions;
-import com.crossover.trial.properties.alext.parser.converts.AwsRegionsConverter;
-import com.crossover.trial.properties.alext.parser.converts.BooleanConverter;
+import com.crossover.trial.properties.alext.parser.converts.AwsRegionsPropertyParser;
+import com.crossover.trial.properties.alext.parser.converts.BooleanPropertyParser;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -12,9 +12,9 @@ import static org.junit.Assert.*;
 /**
  * Created by tsumaraa on 15/01/2016.
  */
-public class PropertyParserTest {
+public class PropertyMatcherTest {
 
-    private PropertyParser parser=new PropertyParser(new AwsRegionsConverter(), new BooleanConverter());
+    private PropertyMatcher parser=new PropertyMatcher(new AwsRegionsPropertyParser(), new BooleanPropertyParser());
 
     @Test
     public void testParseBoolOrStringProperty() throws Exception {

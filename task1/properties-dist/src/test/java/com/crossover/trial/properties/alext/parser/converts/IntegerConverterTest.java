@@ -9,24 +9,25 @@ import static org.junit.Assert.*;
  */
 public class IntegerConverterTest {
 
-    private IntegerConverter converter=new IntegerConverter();
+    private IntegerPropertyParser parser = new IntegerPropertyParser();
+
     @Test
     public void testIsValidValue() throws Exception {
-        assertTrue(converter.isValidValue("345"));
-        assertTrue(converter.isValidValue("-34"));
-        assertTrue(converter.isValidValue("+34"));
-        assertTrue(converter.isValidValue(" 0 "));
-        assertFalse(converter.isValidValue(" 0 0 "));
+        assertTrue(parser.isValidValue("345"));
+        assertTrue(parser.isValidValue("-34"));
+        assertTrue(parser.isValidValue("+34"));
+        assertTrue(parser.isValidValue(" 0 "));
+        assertFalse(parser.isValidValue(" 0 0 "));
     }
 
     @Test
     public void testParseValue() throws Exception {
-        assertEquals(-34,converter.parseValue("-34"));
-        assertEquals(34,converter.parseValue("+34"));
+        assertEquals((Integer) (-34), parser.parseValue("t", "-34").getValue());
+        assertEquals((Integer) 34, parser.parseValue("t", "+34").getValue());
     }
 
     @Test
     public void testGetSupportedType() throws Exception {
-        assertEquals(Integer.class, converter.getSupportedType());
+        assertEquals(Integer.class, parser.getSupportedType());
     }
 }
