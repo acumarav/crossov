@@ -1,4 +1,4 @@
-package com.crossover.trial.properties.alext.parser.converts;
+package com.crossover.trial.properties.alext.properties.converts;
 
 import com.amazonaws.regions.Regions;
 import org.junit.Test;
@@ -19,6 +19,7 @@ public class EnumValidatorTest {
     @Test
     public void testParseExistingEnumMemberQ() {
         assertTrue(enumParser.isValidValue("AP_NORTHEAST_2"));
+        assertEquals(Regions.class, enumParser.getSupportedType());
     }
 
     @Test
@@ -35,5 +36,7 @@ public class EnumValidatorTest {
         assertTrue(awsRegionParser.isValidValue("ap-northeast-2"));
         assertTrue(awsRegionParser.isValidValue("sa-east-1"));
         assertTrue(awsRegionParser.isValidValue("cn-north-1"));
+
+        assertEquals(Regions.class, awsRegionParser.getSupportedType());
     }
 }

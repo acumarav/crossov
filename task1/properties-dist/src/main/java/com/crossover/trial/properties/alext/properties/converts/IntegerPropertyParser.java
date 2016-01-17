@@ -1,6 +1,6 @@
-package com.crossover.trial.properties.alext.parser.converts;
+package com.crossover.trial.properties.alext.properties.converts;
 
-import com.crossover.trial.properties.alext.parser.Property;
+import com.crossover.trial.properties.alext.properties.BaseProperty;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,13 +20,18 @@ public class IntegerPropertyParser implements PropertyParser<Integer> {
     }
 
     @Override
-    public Property<Integer> parseValue(String name, String value) {
+    public BaseProperty<Integer> parseValue(String name, String value) {
 
         Preconditions.checkNotNull(name);
         Preconditions.checkArgument(isValidValue(value));
 
         Integer val = Integer.valueOf(StringUtils.trim(value));
-        return new Property<Integer>(name, val, value);
+        return new BaseProperty<Integer>(name, val, value);
+    }
+
+    @Override
+    public Class getSupportedType() {
+        return Integer.class;
     }
 
 

@@ -1,7 +1,7 @@
-package com.crossover.trial.properties.alext.parser.converts;
+package com.crossover.trial.properties.alext.properties.converts;
 
 import com.amazonaws.regions.Regions;
-import com.crossover.trial.properties.alext.parser.Property;
+import com.crossover.trial.properties.alext.properties.BaseProperty;
 import com.google.common.base.Preconditions;
 
 /**
@@ -21,13 +21,18 @@ public class AwsRegionsPropertyParser implements PropertyParser<Regions> {
     }
 
     @Override
-    public Property<Regions> parseValue(String name,String value) {
+    public BaseProperty<Regions> parseValue(String name,String value) {
         Preconditions.checkNotNull(name);
         Preconditions.checkArgument(isValidValue(value));
 
         Regions regions = Regions.fromName(value);
-        return new Property<Regions>(name,regions, value);
+        return new BaseProperty<Regions>(name,regions, value);
 
+    }
+
+    @Override
+    public Class getSupportedType() {
+        return Regions.class;
     }
 
 

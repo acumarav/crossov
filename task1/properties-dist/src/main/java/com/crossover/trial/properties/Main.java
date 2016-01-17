@@ -34,8 +34,8 @@ public class Main {
 
         List<String> propertySourceUris = Arrays.asList(args).subList(1, args.length);
 
-        // invoke the property parser and print out properties alphabetically
-        AppPropertiesManager m = new TrialAppPropertiesManager(loader, propertyMatcher);
+        // invoke the property properties and print out properties alphabetically
+        AppPropertiesManager m = new TrialAppPropertiesManager(null,null);
         AppProperties props = m.loadProps(propertySourceUris);
         m.printProperties(props, new PrintStream(new FileOutputStream(outputFile)));
     }

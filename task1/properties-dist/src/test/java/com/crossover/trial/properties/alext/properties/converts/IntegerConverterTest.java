@@ -1,4 +1,4 @@
-package com.crossover.trial.properties.alext.parser.converts;
+package com.crossover.trial.properties.alext.properties.converts;
 
 import org.junit.Test;
 
@@ -28,6 +28,6 @@ public class IntegerConverterTest {
 
    /* @Test
     public void testGetSupportedType() throws Exception {
-        assertEquals(Integer.class, parser.getSupportedType());
+        assertEquals(Integer.class, properties.getSupportedType());
     }*/
 }

@@ -1,8 +1,8 @@
-package com.crossover.trial.properties.alext.parser;
+package com.crossover.trial.properties.alext.properties;
 
 import com.amazonaws.regions.Regions;
-import com.crossover.trial.properties.alext.parser.converts.AwsRegionsPropertyParser;
-import com.crossover.trial.properties.alext.parser.converts.BooleanPropertyParser;
+import com.crossover.trial.properties.alext.properties.converts.AwsRegionsPropertyParser;
+import com.crossover.trial.properties.alext.properties.converts.BooleanPropertyParser;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -18,8 +18,8 @@ public class PropertyMatcherTest {
 
     @Test
     public void testParseBoolOrStringProperty() throws Exception {
-        Property boolProp = parser.parseProperty("boolProperty", Arrays.asList("true", "false"));
-        Property stringProp = parser.parseProperty("stringProperty", Arrays.asList("true", "false","not bool"));
+        BaseProperty boolProp = parser.parseProperty("boolProperty", Arrays.asList("true", "false"));
+        BaseProperty stringProp = parser.parseProperty("stringProperty", Arrays.asList("true", "false","not bool"));
 
         assertNotNull(boolProp);
         assertEquals(Boolean.class,boolProp.getPropertyType());
@@ -36,9 +36,9 @@ public class PropertyMatcherTest {
     @Test
     public void testParseAwsRegionsProperty(){
 
-        Property awsProperty=parser.parseProperty("awsRegion",Arrays.asList("us-gov-west-1","us-east-1","us-west-1","us-west-2","eu-west-1","eu-central-1","ap-southeast-1","ap-southeast-2","ap-northeast-1","ap-northeast-2","sa-east-1","cn-north-1"));
+        BaseProperty awsProperty=parser.parseProperty("awsRegion",Arrays.asList("us-gov-west-1","us-east-1","us-west-1","us-west-2","eu-west-1","eu-central-1","ap-southeast-1","ap-southeast-2","ap-northeast-1","ap-northeast-2","sa-east-1","cn-north-1"));
 
-        Property fakeAwsProperty=parser.parseProperty("fakeAwsRegion",Arrays.asList("N/A","us-gov-west-1","us-east-1","us-west-1","us-west-2","eu-west-1","eu-central-1","ap-southeast-1","ap-southeast-2","ap-northeast-1","ap-northeast-2","sa-east-1","cn-north-1"));
+        BaseProperty fakeAwsProperty=parser.parseProperty("fakeAwsRegion",Arrays.asList("N/A","us-gov-west-1","us-east-1","us-west-1","us-west-2","eu-west-1","eu-central-1","ap-southeast-1","ap-southeast-2","ap-northeast-1","ap-northeast-2","sa-east-1","cn-north-1"));
 
         assertNotNull(awsProperty);
         assertEquals(Regions.class, awsProperty.getPropertyType());

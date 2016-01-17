@@ -1,7 +1,7 @@
 package com.crossover.trial.properties;
 
 import com.crossover.trial.properties.alext.PropertiesLoader;
-import com.crossover.trial.properties.alext.parser.PropertyMatcher;
+import com.crossover.trial.properties.alext.properties.PropertyMatcher;
 import com.google.common.base.Preconditions;
 
 import java.io.PrintStream;
@@ -26,8 +26,8 @@ public class TrialAppPropertiesManager implements AppPropertiesManager {
     private final PropertyMatcher propertyMatcher;
 
     public TrialAppPropertiesManager(PropertiesLoader loader, PropertyMatcher propertyMatcher) {
-        this.propertyMatcher = propertyMatcher;
         Preconditions.checkNotNull(loader);
+        this.propertyMatcher = propertyMatcher;
         this.loader = loader;
     }
 

@@ -1,6 +1,6 @@
-package com.crossover.trial.properties.alext.parser.converts;
+package com.crossover.trial.properties.alext.properties.converts;
 
-import com.crossover.trial.properties.alext.parser.Property;
+import com.crossover.trial.properties.alext.properties.BaseProperty;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
 
@@ -17,13 +17,18 @@ public class BooleanPropertyParser implements PropertyParser<Boolean> {
 
 
     @Override
-    public Property<Boolean> parseValue(String name, String value) {
+    public BaseProperty<Boolean> parseValue(String name, String value) {
 
         Preconditions.checkNotNull(name);
         Preconditions.checkArgument(isValidValue(value));
 
         Boolean val = Boolean.valueOf(name);
-        return new Property<Boolean>(name, val, value);
+        return new BaseProperty<Boolean>(name, val, value);
+    }
+
+    @Override
+    public Class getSupportedType() {
+        return Boolean.class;
     }
 
 }

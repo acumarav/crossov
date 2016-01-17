@@ -1,6 +1,6 @@
-package com.crossover.trial.properties.alext.parser;
+package com.crossover.trial.properties.alext.properties;
 
-import com.crossover.trial.properties.alext.parser.converts.PropertyParser;
+import com.crossover.trial.properties.alext.properties.converts.PropertyParser;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class PropertyMatcherImpl implements PropertyMatcher {
     }
 
     @Override
-    public Property parseProperty(String name, List<String> values) {
+    public BaseProperty parseProperty(String name, List<String> values) {
 
         String lastValue = values.get(values.size() - 1);
         converter:
@@ -33,7 +33,7 @@ public class PropertyMatcherImpl implements PropertyMatcher {
         }
 
         //By Default any property can be string
-        return new Property<String>(name, lastValue, lastValue);
+        return new BaseProperty<String>(name, lastValue, lastValue);
 
     }
 }

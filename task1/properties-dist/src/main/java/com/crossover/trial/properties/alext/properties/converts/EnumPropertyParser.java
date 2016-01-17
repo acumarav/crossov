@@ -1,6 +1,6 @@
-package com.crossover.trial.properties.alext.parser.converts;
+package com.crossover.trial.properties.alext.properties.converts;
 
-import com.crossover.trial.properties.alext.parser.Property;
+import com.crossover.trial.properties.alext.properties.BaseProperty;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
 
@@ -33,14 +33,19 @@ public class EnumPropertyParser implements PropertyParser<Enum> {
     }
 
     @Override
-    public Property<Enum> parseValue(String name, String value) {
+    public BaseProperty<Enum> parseValue(String name, String value) {
 
         Preconditions.checkNotNull(name);
         Preconditions.checkArgument(isValidValue(value));
 
         Enum member = findEnumMemberByName(value);
 
-        return new Property<Enum>(name, member, value);
+        return new BaseProperty<Enum>(name, member, value);
+    }
+
+    @Override
+    public Class getSupportedType() {
+        return enumType;
     }
 
     private Enum findEnumMemberByName(String name) {
