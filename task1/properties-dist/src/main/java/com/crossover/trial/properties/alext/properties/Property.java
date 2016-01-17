@@ -13,6 +13,8 @@ public interface Property<T> {
 
     Boolean isValid();
 
+    public Class getSupportedType();
+
     default void reset() {
         parseValue(null);
     }

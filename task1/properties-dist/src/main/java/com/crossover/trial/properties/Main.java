@@ -1,5 +1,7 @@
 package com.crossover.trial.properties;
 
+import com.crossover.trial.properties.alext.PropertiesLoaderImpl;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -35,7 +37,7 @@ public class Main {
         List<String> propertySourceUris = Arrays.asList(args).subList(1, args.length);
 
         // invoke the property properties and print out properties alphabetically
-        AppPropertiesManager m = new TrialAppPropertiesManager(null,null);
+        AppPropertiesManager m = new TrialAppPropertiesManager(new PropertiesLoaderImpl());
         AppProperties props = m.loadProps(propertySourceUris);
         m.printProperties(props, new PrintStream(new FileOutputStream(outputFile)));
     }

@@ -1,6 +1,7 @@
-package com.crossover.trial.properties.alext.properties.converts;
+package com.crossover.trial.properties.alext.properties;
 
 import com.amazonaws.regions.Regions;
+import com.crossover.trial.properties.alext.properties.EnumProperty;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -9,17 +10,17 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by tsumaraa on 15/01/2016.
  */
-public class EnumValidatorTest {
+public class EnumPropertyTest {
 
-    private EnumPropertyParser enumParser = new EnumPropertyParser(Regions.class);
-    private AwsRegionsPropertyParser awsRegionParser = new AwsRegionsPropertyParser();
+    private EnumProperty enumParser = new EnumProperty("enumProp",Regions.class);
+    private AwsRegionsProperty awsRegionParser = new AwsRegionsProperty("awsProp");
 
 
 
     @Test
     public void testParseExistingEnumMemberQ() {
-        assertTrue(enumParser.isValidValue("AP_NORTHEAST_2"));
-        assertEquals(Regions.class, enumParser.getSupportedType());
+        assertTrue(enumParser.parseValue("AP_NORTHEAST_2"));
+        //assertEquals(Regions.class, enumParser.());
     }
 
     @Test
@@ -37,6 +38,6 @@ public class EnumValidatorTest {
         assertTrue(awsRegionParser.isValidValue("sa-east-1"));
         assertTrue(awsRegionParser.isValidValue("cn-north-1"));
 
-        assertEquals(Regions.class, awsRegionParser.getSupportedType());
+       // assertEquals(Regions.class, awsRegionParser.ge());
     }
 }

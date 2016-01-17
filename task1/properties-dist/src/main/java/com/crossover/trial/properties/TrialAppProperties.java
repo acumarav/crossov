@@ -1,18 +1,15 @@
 package com.crossover.trial.properties;
 
-import com.crossover.trial.properties.alext.properties.BooleanProperty;
-import com.crossover.trial.properties.alext.properties.IntegerProperty;
-import com.crossover.trial.properties.alext.properties.Property;
-import com.crossover.trial.properties.alext.properties.StringProperty;
+import com.crossover.trial.properties.alext.properties.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * A dummy implementation of TrialAppProperties, this clearly doesn't work. Candidates SHOULD change 
+ * A dummy implementation of TrialAppProperties, this clearly doesn't work. Candidates SHOULD change
  * this class to add their implementation. You are also free to create additional classes
- *
+ * <p>
  * note: a default constructor is required.
  *
  * @author code test administrator
@@ -21,12 +18,12 @@ public class TrialAppProperties implements AppProperties {
 
     private final Set<Property> knownProperties;
 
-    public TrialAppProperties(){
+    public TrialAppProperties() {
         this(new HashMap<>());
     }
 
-    public TrialAppProperties(Map<String,List<String>> data){
-        knownProperties=new HashSet<>();
+    public TrialAppProperties(Map<String, List<String>> data) {
+        knownProperties = new HashSet<>();
 
         knownProperties.add(new StringProperty("jdbc_driver"));
         knownProperties.add(new StringProperty("jdbc_url"));
@@ -38,54 +35,55 @@ public class TrialAppProperties implements AppProperties {
 
         knownProperties.add(new StringProperty("aws_access_key"));
         knownProperties.add(new StringProperty("aws_secret_key"));
-        knownProperties.add(new IntegerProperty("aws_account_id"));
+        knownProperties.add(new IntegerProperty("aws_account_id"));//10
         knownProperties.add(new StringProperty("aws_region_id"));
 
-        knownProperties.add(new StringProperty("auth_endpoint_uri"));
+        knownProperties.add(new UriProperty("auth_endpoint_uri"));
         knownProperties.add(new IntegerProperty("job_timeout"));
         knownProperties.add(new IntegerProperty("job_maxretry"));
-        knownProperties.add(new StringProperty("sns_broadcast_topic_name"));
+        knownProperties.add(new StringProperty("sns_broadcast_topic_name")); //15
         knownProperties.add(new IntegerProperty("sns_broadcast_visibility_timeout"));
-        knownProperties.add(new StringProperty("score_factor"));
-        knownProperties.add(new BooleanProperty("jpa_showsql"));
+        knownProperties.add(new DoubleProperty("score_factor"));
 
 
-        for(String propertyName: data.keySet()){
-            Optional<Property> prop=findByName(propertyName);
-            if(prop.isPresent()) {
+        for (String propertyName : data.keySet()) {
+            Optional<Property> propOption = findByName(propertyName);
+            if (propOption.isPresent()) {
                 List<String> values = data.get(propertyName);
-                String lastValue = values.get(values.size());
-                prop.parseValue(lastValue);
+                String lastValue = values.get(values.size()-1);
+                propOption.get().parseValue(lastValue);
             }
         }
     }
 
     private Optional<Property> findByName(String propertyName) {
-        String normalizedName= StringUtils.trim(propertyName).toLowerCase().replace('.','_');
+        String normalizedName = StringUtils.trim(propertyName).toLowerCase().replace('.', '_');
 
-        Optional<Property> prop = knownProperties.stream().filter(p -> StringUtils.equalsIgnoreCase(propertyName, p.getName())).findFirst();
+        Optional<Property> prop = knownProperties.stream().filter(p -> StringUtils.equalsIgnoreCase(normalizedName, p.getName())).findFirst();
 
         return prop;
     }
 
     @Override
     public List<String> getMissingProperties() {
-        return knownProperties.stream().filter(p->!p.isValid()).map(p->p.getName()).collect(Collectors.toList());
+        return knownProperties.stream().filter(p -> !p.isValid()).map(p -> p.getName()).collect(Collectors.toList());
     }
 
     @Override
     public List<String> getKnownProperties() {
-        return knownProperties.stream().map(p->p.getName()).collect(Collectors.toList());
+        //return new ArrayList<>(knownProperties);
+        return knownProperties.stream().map(p -> p.getName()).collect(Collectors.toList());
     }
 
     @Override
     public boolean isValid() {
-        knownProperties.stream().filter()
+        Optional<Property> notValidProp = knownProperties.stream().filter(p -> !p.isValid()).findFirst();
+        return !notValidProp.isPresent();
     }
 
     @Override
     public void clear() {
-        for(Property prop:knownProperties){
+        for (Property prop : knownProperties) {
             prop.reset();
         }
 
@@ -94,11 +92,23 @@ public class TrialAppProperties implements AppProperties {
     @Override
     public Object get(String key) {
         Optional<Property> prop = findByName(key);
-        if(prop.isPresent()){
+        if (prop.isPresent()) {
             return prop.get().getValue();
         }
 
         return null;
+    }
+
+    @Override
+    public String toString() {
+        List<Property> sortedProps = knownProperties.stream().sorted((x, y) -> String.CASE_INSENSITIVE_ORDER.compare(x.getName(), y.getName())).collect(Collectors.toList());
+
+        StringBuilder sb=new StringBuilder();
+        for(Property p:sortedProps){
+            sb.append(String.format("%s, %s, %s\n", p.getName(), p.getSupportedType().getName(), p.getValue()));
+        }
+
+        return sb.toString();
     }
 }
 
