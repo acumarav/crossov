@@ -1,13 +1,13 @@
 package com.crossover.trial.properties;
 
+import com.crossover.trial.properties.alext.properties.BooleanProperty;
 import com.crossover.trial.properties.alext.properties.IntegerProperty;
 import com.crossover.trial.properties.alext.properties.Property;
 import com.crossover.trial.properties.alext.properties.StringProperty;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * A dummy implementation of TrialAppProperties, this clearly doesn't work. Candidates SHOULD change 
@@ -19,60 +19,86 @@ import java.util.Map;
  */
 public class TrialAppProperties implements AppProperties {
 
-    private final Map<String,Property> knownProperties;
+    private final Set<Property> knownProperties;
 
     public TrialAppProperties(){
-        knownProperties=new HashMap<>();
-        knownProperties.put("JDBC_DRIVER",new StringProperty());
+        this(new HashMap<>());
+    }
+
+    public TrialAppProperties(Map<String,List<String>> data){
+        knownProperties=new HashSet<>();
+
+        knownProperties.add(new StringProperty("jdbc_driver"));
+        knownProperties.add(new StringProperty("jdbc_url"));
+        knownProperties.add(new StringProperty("jdbc_username"));
+        knownProperties.add(new StringProperty("jdbc_password"));
+        knownProperties.add(new BooleanProperty("hibernate_generate_statistics"));
+        knownProperties.add(new BooleanProperty("hibernate_show_sql"));
+        knownProperties.add(new BooleanProperty("jpa_showsql"));
+
+        knownProperties.add(new StringProperty("aws_access_key"));
+        knownProperties.add(new StringProperty("aws_secret_key"));
+        knownProperties.add(new IntegerProperty("aws_account_id"));
+        knownProperties.add(new StringProperty("aws_region_id"));
+
+        knownProperties.add(new StringProperty("auth_endpoint_uri"));
+        knownProperties.add(new IntegerProperty("job_timeout"));
+        knownProperties.add(new IntegerProperty("job_maxretry"));
+        knownProperties.add(new StringProperty("sns_broadcast_topic_name"));
+        knownProperties.add(new IntegerProperty("sns_broadcast_visibility_timeout"));
+        knownProperties.add(new StringProperty("score_factor"));
+        knownProperties.add(new BooleanProperty("jpa_showsql"));
 
 
-        knownProperties.put("JDBC_DRIVER",new StringProperty());
-        knownProperties.put("JDBC_URL",new StringProperty());
-        knownProperties.put("JDBC_USERNAME",new StringProperty());
-        knownProperties.put("JDBC_PASSWORD",new StringProperty());
-        knownProperties.put("hibernate.generate_statistics",new BooleanProperty());
-        knownProperties.put("hibernate.show_sql",new BooleanProperty());
-        knownProperties.put("jpa.showSql", new BooleanProperty());
+        for(String propertyName: data.keySet()){
+            Optional<Property> prop=findByName(propertyName);
+            if(prop.isPresent()) {
+                List<String> values = data.get(propertyName);
+                String lastValue = values.get(values.size());
+                prop.parseValue(lastValue);
+            }
+        }
+    }
 
-        knownProperties.put("aws_access_key",new StringProperty());
-        knownProperties.put("aws_secret_key",new StringProperty());
-        knownProperties.put("aws_account_id",new IntegerProperty());
-        knownProperties.put("aws_region_id",new StringProperty());
+    private Optional<Property> findByName(String propertyName) {
+        String normalizedName= StringUtils.trim(propertyName).toLowerCase().replace('.','_');
 
-        knownProperties.put("auth.endpoint.uri",new StringProperty());
-        knownProperties.put("job.timeout",new IntegerProperty());
-        knownProperties.put("job.maxretry",new IntegerProperty());
-        knownProperties.put("sns.broadcast.topic_name",new StringProperty());
-        knownProperties.put("sns.broadcast.visibility_timeout",new IntegerProperty());
-        knownProperties.put("score.factor",new StringProperty());
-        knownProperties.put("jpa.showSql",new BooleanProperty());
+        Optional<Property> prop = knownProperties.stream().filter(p -> StringUtils.equalsIgnoreCase(propertyName, p.getName())).findFirst();
 
-
+        return prop;
     }
 
     @Override
     public List<String> getMissingProperties() {
-        return Collections.emptyList();
+        return knownProperties.stream().filter(p->!p.isValid()).map(p->p.getName()).collect(Collectors.toList());
     }
 
     @Override
     public List<String> getKnownProperties() {
-        return Collections.emptyList();
+        return knownProperties.stream().map(p->p.getName()).collect(Collectors.toList());
     }
 
     @Override
     public boolean isValid() {
-        return true;
+        knownProperties.stream().filter()
     }
 
     @Override
     public void clear() {
+        for(Property prop:knownProperties){
+            prop.reset();
+        }
 
     }
 
     @Override
     public Object get(String key) {
-        return "dummy";
+        Optional<Property> prop = findByName(key);
+        if(prop.isPresent()){
+            return prop.get().getValue();
+        }
+
+        return null;
     }
 }
 

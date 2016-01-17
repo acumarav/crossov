@@ -8,4 +8,13 @@ public interface Property<T> {
     String getName();
 
     T getValue();
+
+    Boolean parseValue(String value);
+
+    Boolean isValid();
+
+    default void reset() {
+        parseValue(null);
+    }
+
 }

@@ -9,7 +9,7 @@ import com.crossover.trial.properties.alext.properties.Property;
 public class StringProperty extends BaseProperty implements Property<String> {
 
     public StringProperty(String name) {
-        super(name);
+        super(name, String.class);
     }
 
     @Override
