@@ -1,8 +1,5 @@
 package com.crossover.trial.properties.alext.properties;
 
-import com.crossover.trial.properties.alext.properties.BaseProperty;
-import com.crossover.trial.properties.alext.properties.Property;
-
 /**
  * Created by alex on 1/16/2016.
  */
@@ -11,7 +8,7 @@ public class StringProperty extends BaseProperty implements Property<String> {
     private String stringValue;
 
     public StringProperty(String name) {
-        super(name, String.class);
+        super(name, String.class, (v)->{return v;});
     }
 
     @Override

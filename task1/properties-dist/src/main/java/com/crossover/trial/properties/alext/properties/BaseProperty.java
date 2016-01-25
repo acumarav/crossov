@@ -1,8 +1,12 @@
 package com.crossover.trial.properties.alext.properties;
 
+import com.google.common.base.Preconditions;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
+import java.util.function.Function;
 
 /**
  * Created by alex on 1/14/2016.
@@ -11,10 +15,18 @@ public abstract  class BaseProperty {
 
     private final String name;
     private final Class supportedType;
+    private final Function<String,Object> parseFunction;
 
-    public BaseProperty(String name, Class supportedType) {
+    private String stringValue;
+
+    public BaseProperty(String name, Class supportedType, Function<String, Object> parseFunction) {
+        Preconditions.checkNotNull(name);
+        Preconditions.checkNotNull(supportedType);
+        Preconditions.checkNotNull(parseFunction);
+
         this.name = name;
         this.supportedType = supportedType;
+        this.parseFunction = parseFunction;
     }
 
 
@@ -27,6 +39,29 @@ public abstract  class BaseProperty {
     }
 
     public abstract Object getValue();
+
+    public boolean isValidValue(String value){
+        try{
+            value=StringUtils.trim(value);
+            parseFunction.apply(value);
+            return true;
+        }
+        catch (Exception ex){
+            return false;
+        }
+    }
+
+    public Object parseValue(String val) {
+        val=StringUtils.trim(val);
+
+        stringValue = val;
+        if (isValidValue(val)) {
+            return parseFunction.apply(stringValue);
+        } else {
+            return null;
+        }
+
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,7 +1,5 @@
 package com.crossover.trial.properties.alext.properties;
 
-import com.crossover.trial.properties.alext.properties.BaseProperty;
-import com.crossover.trial.properties.alext.properties.Property;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
@@ -19,7 +17,7 @@ public class EnumProperty extends  BaseProperty implements Property<Enum> {
     private String  originalValue;
 
     public EnumProperty(String name, Class<? extends Enum> enumType) {
-        super(name, enumType);
+        super(name, enumType, (value)->{return false;});
         this.enumType = enumType;
 
         enumMembers = new TreeMap<>();
@@ -28,7 +26,7 @@ public class EnumProperty extends  BaseProperty implements Property<Enum> {
         }
     }
 
-    private  boolean isValidValue(String value) {
+    private   boolean isValidName(String value) {
         Enum parsed = findEnumMemberByName(value);
 
         return parsed != null;
@@ -43,7 +41,7 @@ public class EnumProperty extends  BaseProperty implements Property<Enum> {
     public Boolean parseValue(String value) {
 
         originalValue=value;
-        if(isValidValue(originalValue)){
+        if(isValidName(originalValue)){
             propValue= findEnumMemberByName(value);
             return true;
         }
@@ -55,7 +53,7 @@ public class EnumProperty extends  BaseProperty implements Property<Enum> {
 
     @Override
     public Boolean isValid() {
-        return isValidValue(originalValue);
+        return isValidName(originalValue);
     }
 
 

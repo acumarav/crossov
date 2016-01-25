@@ -1,5 +1,6 @@
 package com.crossover.trial.properties.alext.properties;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -8,34 +9,18 @@ import org.apache.commons.lang3.StringUtils;
 public class BooleanProperty extends BaseProperty implements Property<Boolean> {
 
     private Boolean value;
-    private String stringValue;
+
 
     public BooleanProperty(String name) {
-        super(name, Boolean.class);
-    }
-
-    private static boolean isValidValue(String value) {
-        String trimmedValue = StringUtils.trim(value);
-        return StringUtils.equalsIgnoreCase(trimmedValue, "true") || StringUtils.equalsIgnoreCase(trimmedValue, "false");
+        super(name, Boolean.class, BooleanUtils::toBooleanObject);
     }
 
     @Override
     public Boolean parseValue(String val) {
-
-        stringValue = val;
-        if (isValidValue(val)) {
-            value = Boolean.valueOf(stringValue);
-            return true;
-        } else {
-            value = null;
-            return false;
-        }
+        value= (Boolean) super.parseValue(val);
+        return isValid();
     }
 
-    @Override
-    public Boolean isValid() {
-        return isValidValue(stringValue);
-    }
 
     @Override
     public Boolean getValue() {

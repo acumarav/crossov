@@ -11,7 +11,9 @@ public interface Property<T> {
 
     Boolean parseValue(String value);
 
-    Boolean isValid();
+    default Boolean isValid(){
+        return getValue()!=null;
+    }
 
     public Class getSupportedType();
 

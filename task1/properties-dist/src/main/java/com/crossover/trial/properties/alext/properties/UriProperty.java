@@ -1,6 +1,5 @@
 package com.crossover.trial.properties.alext.properties;
 
-import com.amazonaws.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +16,7 @@ public class UriProperty  extends BaseProperty implements Property<URI> {
     private String originalValue;
 
     public UriProperty(String name) {
-        super(name, URI.class);
+        super(name, URI.class, URI::create);
     }
 
     @Override
@@ -27,7 +26,7 @@ public class UriProperty  extends BaseProperty implements Property<URI> {
 
     @Override
     public Boolean parseValue(String value) {
-        originalValue= StringUtils.replace(value,"\"","");;
+        originalValue= value;
         if(isValidValue(originalValue)){
             propValue=URI.create(originalValue);
             return true;
@@ -43,13 +42,4 @@ public class UriProperty  extends BaseProperty implements Property<URI> {
         return isValidValue(originalValue);
     }
 
-    private static boolean isValidValue(String value){
-        try{
-            URI.create(value);
-            return true;
-        }catch (Exception ex){
-            LOGGER.error("cannot parse value: "+value, ex);
-            return false;
-        }
-    }
 }
