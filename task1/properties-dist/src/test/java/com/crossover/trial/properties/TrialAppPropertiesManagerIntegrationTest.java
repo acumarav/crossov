@@ -1,5 +1,6 @@
 package com.crossover.trial.properties;
 
+import com.crossover.trial.properties.alext.JsonPropertiesParser;
 import com.crossover.trial.properties.alext.PropertiesLoaderImpl;
 import org.junit.Test;
 
@@ -14,9 +15,11 @@ import static org.junit.Assert.*;
  */
 public class TrialAppPropertiesManagerIntegrationTest {
 
+    private JsonPropertiesParser parser=new JsonPropertiesParser();
+
     @Test
     public void testLoadClassPathPropertyFile(){
-        TrialAppPropertiesManager manager=new TrialAppPropertiesManager(new PropertiesLoaderImpl());
+        TrialAppPropertiesManager manager=new TrialAppPropertiesManager(new PropertiesLoaderImpl(parser));
 
         AppProperties appProps = manager.loadProps(Arrays.asList("classpath:resources/jdbc.properties"));
 
@@ -29,7 +32,7 @@ public class TrialAppPropertiesManagerIntegrationTest {
 
     @Test
     public void testLoadClassPathFileUri() throws URISyntaxException {
-        TrialAppPropertiesManager manager=new TrialAppPropertiesManager(new PropertiesLoaderImpl());
+        TrialAppPropertiesManager manager=new TrialAppPropertiesManager(new PropertiesLoaderImpl(parser));
 
         URI uri = this.getClass().getResource("/config.json").toURI();
 

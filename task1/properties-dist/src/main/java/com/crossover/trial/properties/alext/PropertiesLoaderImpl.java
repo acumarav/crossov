@@ -1,8 +1,5 @@
 package com.crossover.trial.properties.alext;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -14,7 +11,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
@@ -24,47 +20,28 @@ import java.util.Properties;
 public class PropertiesLoaderImpl implements PropertiesLoader {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesLoaderImpl.class);
+    private final JsonPropertiesParser jpParser;
+
+    public PropertiesLoaderImpl(JsonPropertiesParser jpParser) {
+        this.jpParser = jpParser;
+    }
+
 
     @Override
     public Properties loadResource(String resource) {
 
         Preconditions.checkNotNull(resource);
-
         Properties props = new Properties();
 
         try {
 
-            InputStream ins = null;
-
-            if (StringUtils.startsWithIgnoreCase(resource, "classpath:")) {
-                String key = StringUtils.removeStartIgnoreCase(resource, "classpath:resources");
-                ins = this.getClass().getResourceAsStream(key);
-            } else {
-                URI uri = URI.create(resource);
-                byte[] content = IOUtils.toByteArray(uri);
-                ins = new ByteArrayInputStream(content);
-            }
-
+            InputStream ins = getInputStream(resource);
             String ext = StringUtils.lowerCase(FilenameUtils.getExtension(resource));
 
             switch (ext) {
                 case "json":
-
-                    JsonFactory factory = new JsonFactory();
-                    ObjectMapper mapper = new ObjectMapper(factory);
-                    JsonNode rootNode = mapper.readTree(ins);
-
-                    Iterator<Map.Entry<String, JsonNode>> fieldsIterator = rootNode.fields();
-
-                    while (fieldsIterator.hasNext()) {
-
-                        Map.Entry<String, JsonNode> field = fieldsIterator.next();
-
-                        if (field.getValue() != null) {
-                            props.put(field.getKey(), field.getValue().toString());
-                        }
-                    }
-
+                    Map<String, String> parsedValues = jpParser.parse(ins);
+                    props.putAll(parsedValues);
                     break;
 
                 case "properties":
@@ -75,12 +52,22 @@ public class PropertiesLoaderImpl implements PropertiesLoader {
                     LOGGER.error("unexpected file uri extension " + resource + " - " + ext);
                     break;
             }
-
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.error("cannot load " + resource, e);
         }
         return props;
+    }
 
+    private InputStream getInputStream(String resource) throws IOException {
+        InputStream ins;
+        if (StringUtils.startsWithIgnoreCase(resource, "classpath:")) {
+            String key = StringUtils.removeStartIgnoreCase(resource, "classpath:resources");
+            ins = this.getClass().getResourceAsStream(key);
+        } else {
+            URI uri = URI.create(resource);
+            byte[] content = IOUtils.toByteArray(uri);
+            ins = new ByteArrayInputStream(content);
+        }
+        return ins;
     }
 }

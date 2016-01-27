@@ -1,5 +1,6 @@
 package com.crossover.trial.properties;
 
+import com.crossover.trial.properties.alext.JsonPropertiesParser;
 import com.crossover.trial.properties.alext.PropertiesLoaderImpl;
 
 import java.io.File;
@@ -37,7 +38,7 @@ public class Main {
         List<String> propertySourceUris = Arrays.asList(args).subList(1, args.length);
 
         // invoke the property properties and print out properties alphabetically
-        AppPropertiesManager m = new TrialAppPropertiesManager(new PropertiesLoaderImpl());
+        AppPropertiesManager m = new TrialAppPropertiesManager(new PropertiesLoaderImpl(new JsonPropertiesParser()));
         AppProperties props = m.loadProps(propertySourceUris);
         m.printProperties(props, new PrintStream(new FileOutputStream(outputFile)));
     }

@@ -13,7 +13,6 @@ public class UriProperty  extends BaseProperty implements Property<URI> {
     private static final Logger LOGGER = LoggerFactory.getLogger(UriProperty.class);
 
     private URI propValue;
-    private String originalValue;
 
     public UriProperty(String name) {
         super(name, URI.class, URI::create);
@@ -26,20 +25,8 @@ public class UriProperty  extends BaseProperty implements Property<URI> {
 
     @Override
     public Boolean parseValue(String value) {
-        originalValue= value;
-        if(isValidValue(originalValue)){
-            propValue=URI.create(originalValue);
-            return true;
-        }
-        else {
-            propValue=null;
-            return null;
-        }
-    }
-
-    @Override
-    public Boolean isValid() {
-        return isValidValue(originalValue);
+        propValue=(URI)super.parseValue(value);
+        return isValid();
     }
 
 }

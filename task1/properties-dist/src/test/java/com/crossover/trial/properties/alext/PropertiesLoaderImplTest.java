@@ -16,10 +16,11 @@ import static org.junit.Assert.*;
 public class PropertiesLoaderImplTest {
 
     private PropertiesLoaderImpl loader;
+    private JsonPropertiesParser parser=new JsonPropertiesParser();
 
     @Before
     public void setUp() {
-        loader = new PropertiesLoaderImpl();
+        loader = new PropertiesLoaderImpl(parser);
     }
 
     @Test
