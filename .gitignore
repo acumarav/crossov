@@ -13,4 +13,6 @@ hs_err_pid*
 
 **/target/*
 **/.idea/*
+**/out/*
+**/node_modules/*
 **/*.iml

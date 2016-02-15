@@ -1,212 +1,36 @@
-<!DOCTYPE html>
-<html lang="en" style="font-size: 13.8px;">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style type="text/css">.gm-style .gm-style-mtc label, .gm-style .gm-style-mtc div {
-        font-weight: 400
-    }</style>
-    <link type="text/css" rel="stylesheet" href="./ISS Tracker - МКС карта трекинг_files/css">
-    <style type="text/css">.gm-style .gm-style-cc span, .gm-style .gm-style-cc a, .gm-style .gm-style-mtc div {
-        font-size: 10px
-    }</style>
-    <style type="text/css">@media print {
-        .gm-style .gmnoprint, .gmnoprint {
-            display: none
-        }
-    }
 
-    @media screen {
-        .gm-style .gmnoscreen, .gmnoscreen {
-            display: none
-        }
-    }</style>
-    <style type="text/css">.gm-style {
-        font-family: Roboto, Arial, sans-serif;
-        font-size: 11px;
-        font-weight: 400;
-        text-decoration: none
-    }
+<article>
+    <header>
+        <script type="text/javascript" charset="UTF-8" src="./js/iss/js.js"></script>
+        <script async="" src="./js/iss/analytics.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="./js/iss/common.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="./js/iss/util.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="./js/iss/stats.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="./js/iss/map.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="./js/iss/marker.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="./js/iss/onion.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="./js/iss/controls.js"></script>
+        <script type="text/javascript" src="./js/iss/tracker.js"/>
 
-    .gm-style img {
-        max-width: none
-    }</style>
-    <title>CB Monitor</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <!--anti iframe-->
+        <script type="text/javascript">
+            debugger;
+            alert("hello");
+            log("init map");
+            $(document).ready(function(){
+                log("init map");
+                issTracker_init();
+            });
 
-    <meta name="description" content="Real-time camera view from the International Space Station.">
-    <meta name="robots" content="noodp,noydir,noarchive">
-    <meta property="og:locale" content="en_GB">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Real-time location and view from the International Space Station.">
-    <meta property="og:description" content="Real-time camera view from the International Space Station.">
-    <meta property="og:url" content="issview.info/about.html">
-    <meta property="og:site_name" content="issview.info">
-    <meta property="og:image" content="http://issview.info">
+            $(window).on('resize', function(){
+                log.("subscribing to resize");
+                issTrackerResize();
+            });
 
-    <!-- / Yoast SEO plugin. -->
-    <link rel="shortcut icon" href="http://space.utema.ru/favicon.ico" type="image/x-icon">
-    <!--  Apple Touch Icons -->
-    <link rel="apple-touch-icon" href="http://space.utema.ru/apple-touch-icon.png">
-    <script async="" src="./js/iss/analytics.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="./js/iss/js"></script>
-    <script type="text/javascript" src="./js/iss/tracker.js"/>
+        </script>
+    </header>
 
-    <style type="text/css">
-        @font-face {
-            font-family: 'NotesEsaBold';
-            src: url('fonts/notesstyle-bold-updatedtf-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/notesstyle-bold-updatedtf-webfont.woff') format('woff'), url('fonts/notesstyle-bold-updatedtf-webfont.ttf') format('truetype'), url('fonts/notesstyle-bold-updatedtf-webfont.svg#CenturyGothic') format('svg');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'NotesEsaRegular';
-            src: url('fonts/NotesEsaReg.eot');
-            src: url('fonts/NotesEsaReg.eot?#iefix') format('embedded-opentype'), url('fonts/NotesEsaReg.ttf') format('truetype'), url('fonts/NotesEsaReg.svg#NotesEsaReg') format('svg');
-            font-weight: normal;
-            font-style: normal
-        }
-
-        html {
-            font-family: "Arial", sans-serif;
-            font-size: 13pt;
-            color: white;
-            background-color: #cccccc;
-        }
-
-        html, body, div, canvas, p, table {
-            margin: 0;
-            padding: 0;
-            border: 0;
-        }
-
-        #cover {
-            width: 100%;
-            max-width: 920px;
-            background-color: #cccccc;
-            background: url('./imgs/cover.jpg');
-            background-position: center;
-            background-size: cover;
-        }
-
-        #isst {
-            width: 100%;
-            max-width: 920px;
-            display: none;
-        }
-
-        #isstwp {
-            width: 100%;
-        }
-
-        #isst_dt {
-            font-family: "NotesEsaRegular", sans-serif;
-            position: relative;
-        }
-
-        .isst_cl {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .isst_cd {
-            font-size: 1.3rem;
-        }
-
-        #btns {
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
-
-        #btn_metric {
-            width: 50px;
-            height: 25px;
-            border-radius: 100pt;
-            border: 2px rgba(255, 255, 255, 0.5) solid;
-            position: relative;
-            cursor: pointer;
-        }
-
-        #btn_metric2 {
-            height: 25px;
-            width: 25px;
-            border-radius: 100pt;
-            background-color: white;
-            position: absolute;
-            left: 0px;
-        }
-
-        #btn_fs {
-            cursor: pointer;
-        }
-
-        #btn_fse {
-            cursor: pointer;
-        }
-
-        #waitmsg {
-            display: none;
-            background-color: rgba(0, 0, 0, 0.75);
-            text-align: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            font-size: 1.1rem;
-        }
-
-        #errmsg {
-            text-align: center;
-            padding: 10pt 0pt 10pt 0pt;
-            background-color: #ff0000;
-            font-size: 9pt;
-            display: none;
-        }
-
-        #map_canvas {
-            width: 100%;
-            max-width: 920px;
-            height: 280px !important;
-            margin: 0;
-            margin-top: 1px;
-        }
-
-        #isstgap {
-            height: 0;
-            background-color: black;
-        }
-
-        #isstgap2 {
-            height: 0;
-            background-color: black;
-        }
-
-        .share {
-            float: right;
-            overflow: hidden;
-            margin-right: 0px;
-            margin-top: -5px !important;
-        }
-    </style>
-    <!--anti iframe-->
-    <script type="text/javascript">
-        var domen = "space.utema.ru";
-        var ref = document.referrer;
-        if (false) top.location.href = location.href;
-    </script>
-    <script type="text/javascript" charset="UTF-8" src="./js/iss/common.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="./js/iss/util.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="./js/iss/stats.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="./js/iss/map.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="./js/iss/marker.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="./js/iss/onion.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="./js/iss/controls.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="./js/iss/controls.js"></script>
-</head>
-
-<body onload="javascript:issTracker_init();" onresize="javascript:issTrackerResize();">
-<center>
+    <section>
     <div id="cover" style="display: none; height: 517.5px; max-width: 920px; width: 920px;">
         <div id="errmsg"></div>
     </div>
@@ -270,7 +94,7 @@
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>
                             <div onclick="javascript:manageFullScreen();"><img id="btn_fs"
-                                                                               src="./ISS Tracker - МКС карта трекинг_files/fullscreen.png"
+                                                                               src="./imgs/fullscreen.png"
                                                                                style="height: 27.6px; display: block;">
                             </div>
                         </td>
@@ -315,21 +139,21 @@
                                          style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;">
                                         <div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: 279px; top: -120px;">
                                             <canvas draggable="false" height="256" width="256"
-                                                    style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas>
+                                            style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas>
                                         </div>
                                         <div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: 279px; top: 136px;">
                                             <canvas draggable="false" height="256" width="256"
-                                                    style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas>
+                                            style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas>
                                         </div>
                                         <div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: 23px; top: -120px;"></div>
                                         <div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: 23px; top: 136px;"></div>
                                         <div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: 535px; top: -120px;">
                                             <canvas draggable="false" height="256" width="256"
-                                                    style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas>
+                                            style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas>
                                         </div>
                                         <div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: 535px; top: 136px;">
                                             <canvas draggable="false" height="256" width="256"
-                                                    style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas>
+                                            style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas>
                                         </div>
                                         <div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: 791px; top: -120px;"></div>
                                         <div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: 791px; top: 136px;"></div>
@@ -342,73 +166,73 @@
                                 <div aria-hidden="true"
                                      style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;">
                                     <div style="transform: translateZ(0px); position: absolute; left: 279px; top: -120px; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/kh" draggable="false" alt=""
+                                        <img src="./imgs/kh" draggable="false" alt=""
                                              style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;"><img
-                                            src="./ISS Tracker - МКС карта трекинг_files/vt" draggable="false" alt=""
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
+                                        src="./imgs/vt" draggable="false" alt=""
+                                        style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
                                     </div>
                                     <div style="transform: translateZ(0px); position: absolute; left: 279px; top: 136px; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/kh(1)" draggable="false"
+                                        <img src="./imgs/kh(1)" draggable="false"
                                              alt=""
                                              style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;"><img
-                                            src="./ISS Tracker - МКС карта трекинг_files/vt(1)" draggable="false" alt=""
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
+                                        src="./imgs/vt(1)" draggable="false" alt=""
+                                        style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
                                     </div>
                                     <div style="transform: translateZ(0px); position: absolute; left: 23px; top: -120px; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/kh(2)" draggable="false"
+                                        <img src="./imgs/kh(2)" draggable="false"
                                              alt=""
                                              style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;"><img
-                                            src="./ISS Tracker - МКС карта трекинг_files/vt(2)" draggable="false" alt=""
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
+                                        src="./imgs/vt(2)" draggable="false" alt=""
+                                        style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
                                     </div>
                                     <div style="transform: translateZ(0px); position: absolute; left: 23px; top: 136px; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/kh(3)" draggable="false"
+                                        <img src="./imgs/kh(3)" draggable="false"
                                              alt=""
                                              style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;"><img
-                                            src="./ISS Tracker - МКС карта трекинг_files/vt(3)" draggable="false" alt=""
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
+                                        src="./imgs/vt(3)" draggable="false" alt=""
+                                        style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
                                     </div>
                                     <div style="transform: translateZ(0px); position: absolute; left: 535px; top: -120px; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/kh(4)" draggable="false"
+                                        <img src="./imgs/kh(4)" draggable="false"
                                              alt=""
                                              style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;"><img
-                                            src="./ISS Tracker - МКС карта трекинг_files/vt(4)" draggable="false" alt=""
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
+                                        src="./imgs/vt(4)" draggable="false" alt=""
+                                        style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
                                     </div>
                                     <div style="transform: translateZ(0px); position: absolute; left: 535px; top: 136px; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/kh(5)" draggable="false"
+                                        <img src="./imgs/kh(5)" draggable="false"
                                              alt=""
                                              style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;"><img
-                                            src="./ISS Tracker - МКС карта трекинг_files/vt(5)" draggable="false" alt=""
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
+                                        src="./imgs/vt(5)" draggable="false" alt=""
+                                        style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
                                     </div>
                                     <div style="transform: translateZ(0px); position: absolute; left: 791px; top: -120px; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/kh(6)" draggable="false"
+                                        <img src="./imgs/kh(6)" draggable="false"
                                              alt=""
                                              style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;"><img
-                                            src="./ISS Tracker - МКС карта трекинг_files/vt(6)" draggable="false" alt=""
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
+                                        src="./imgs/vt(6)" draggable="false" alt=""
+                                        style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
                                     </div>
                                     <div style="transform: translateZ(0px); position: absolute; left: 791px; top: 136px; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/kh(7)" draggable="false"
+                                        <img src="./imgs/kh(7)" draggable="false"
                                              alt=""
                                              style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;"><img
-                                            src="./ISS Tracker - МКС карта трекинг_files/vt(7)" draggable="false" alt=""
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
+                                        src="./imgs/vt(7)" draggable="false" alt=""
+                                        style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;">
                                     </div>
                                     <div style="transform: translateZ(0px); position: absolute; left: 1047px; top: -120px; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/vt(8)" draggable="false"
+                                        <img src="./imgs/vt(8)" draggable="false"
                                              alt=""
                                              style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;"><img
-                                            src="./ISS Tracker - МКС карта трекинг_files/kh(8)" draggable="false" alt=""
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;">
+                                        src="./imgs/kh(8)" draggable="false" alt=""
+                                        style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;">
                                     </div>
                                     <div style="transform: translateZ(0px); position: absolute; left: 1047px; top: 136px; transition: opacity 200ms ease-out; -webkit-transition: opacity 200ms ease-out;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/vt(9)" draggable="false"
+                                        <img src="./imgs/vt(9)" draggable="false"
                                              alt=""
                                              style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 1;"><img
-                                            src="./ISS Tracker - МКС карта трекинг_files/kh(9)" draggable="false" alt=""
-                                            style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;">
+                                        src="./imgs/kh(9)" draggable="false" alt=""
+                                        style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; z-index: 0;">
                                     </div>
                                 </div>
                             </div>
@@ -425,7 +249,7 @@
                         <div style="padding: 0px 0px 10px; font-size: 16px;">Map Data</div>
                         <div style="font-size: 13px;">Map data ©2016 Imagery ©2016 NASA</div>
                         <div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;">
-                            <img src="./ISS Tracker - МКС карта трекинг_files/mapcnt6.png" draggable="false"
+                            <img src="./imgs/mapcnt6.png" draggable="false"
                                  style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
                         </div>
                     </div>
@@ -455,11 +279,11 @@
                         </div>
                         <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;">
                             <a href="https://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank"
-                               style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of Use</a>
+                            style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of Use</a>
                         </div>
                     </div>
                     <div style="width: 25px; height: 25px; margin-top: 10px; overflow: hidden; display: none; margin-right: 14px; position: absolute; top: 0px; right: 0px;">
-                        <img src="./ISS Tracker - МКС карта трекинг_files/sv5.png" draggable="false"
+                        <img src="./imgs/sv5.png" draggable="false"
                              class="gm-fullscreen-control"
                              style="position: absolute; left: -52px; top: -86px; width: 164px; height: 112px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
                     </div>
@@ -472,7 +296,7 @@
                         <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;">
                             <a target="_new" title="Report errors in the road map or imagery to Google"
                                href="https://www.google.com/maps/@-51.0609305,53.0353005,5z/data=!3m1!1e3!10m1!1e1!12b1?source=apiv3&rapsrc=apiv3"
-                               style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;">Report
+                            style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;">Report
                                 a map error</a></div>
                     </div>
                     <div class="gmnoprint" draggable="false" controlwidth="28" controlheight="93"
@@ -483,8 +307,9 @@
                                  style="-webkit-user-select: none; -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; width: 28px; height: 55px; background-color: rgb(255, 255, 255);">
                                 <div title="Zoom in"
                                      style="position: relative; width: 28px; height: 27px; left: 0px; top: 0px;">
+
                                     <div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/tmapctrl.png"
+                                        <img src="./imgs/tmapctrl.png"
                                              draggable="false"
                                              style="position: absolute; left: 0px; top: 0px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;">
                                     </div>
@@ -493,7 +318,7 @@
                                 <div title="Zoom out"
                                      style="position: relative; width: 28px; height: 27px; left: 0px; top: 0px;">
                                     <div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/tmapctrl.png"
+                                        <img src="./imgs/tmapctrl.png"
                                              draggable="false"
                                              style="position: absolute; left: 0px; top: -15px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;">
                                     </div>
@@ -506,17 +331,17 @@
                             <div style="position: absolute; left: 1px; top: 1px;">
                                 <div aria-label="Street View Pegman Control"
                                      style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px;">
-                                    <img src="./ISS Tracker - МКС карта трекинг_files/cb_scout5.png" draggable="false"
+                                    <img src="./imgs/cb_scout5.png" draggable="false"
                                          style="position: absolute; left: -147px; top: -26px; width: 215px; height: 835px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
                                 </div>
                                 <div aria-label="Pegman is on top of the Map"
                                      style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;">
-                                    <img src="./ISS Tracker - МКС карта трекинг_files/cb_scout5.png" draggable="false"
+                                    <img src="./imgs/cb_scout5.png" draggable="false"
                                          style="position: absolute; left: -147px; top: -52px; width: 215px; height: 835px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
                                 </div>
                                 <div aria-label="Street View Pegman Control"
                                      style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;">
-                                    <img src="./ISS Tracker - МКС карта трекинг_files/cb_scout5.png" draggable="false"
+                                    <img src="./imgs/cb_scout5.png" draggable="false"
                                          style="position: absolute; left: -147px; top: -78px; width: 215px; height: 835px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
                                 </div>
                             </div>
@@ -525,12 +350,12 @@
                              style="display: none; position: absolute;">
                             <div title="Rotate map 90 degrees"
                                  style="width: 28px; height: 28px; overflow: hidden; position: absolute; border-radius: 2px; -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; cursor: pointer; display: none; background-color: rgb(255, 255, 255);">
-                                <img src="./ISS Tracker - МКС карта трекинг_files/tmapctrl4.png" draggable="false"
+                                <img src="./imgs/tmapctrl4.png" draggable="false"
                                      style="position: absolute; left: -141px; top: 6px; width: 170px; height: 54px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
                             </div>
                             <div class="gm-tilt"
                                  style="width: 28px; height: 28px; overflow: hidden; position: absolute; border-radius: 2px; -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; top: 0px; cursor: pointer; background-color: rgb(255, 255, 255);">
-                                <img src="./ISS Tracker - МКС карта трекинг_files/tmapctrl4.png" draggable="false"
+                                <img src="./imgs/tmapctrl4.png" draggable="false"
                                      style="position: absolute; left: -141px; top: -13px; width: 170px; height: 54px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;">
                             </div>
                         </div>
@@ -548,7 +373,7 @@
                                     <span role="checkbox"
                                           style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle; background-color: rgb(255, 255, 255);"><div
                                             style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden; display: none;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/imgs8.png" draggable="false"
+                                        <img src="./imgs/imgs8.png" draggable="false"
                                              style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 68px; height: 67px;">
                                     </div></span><label style="vertical-align: middle; cursor: pointer;">Terrain</label>
                                 </div>
@@ -565,7 +390,7 @@
                                     <span role="checkbox"
                                           style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle; background-color: rgb(255, 255, 255);"><div
                                             style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden;">
-                                        <img src="./ISS Tracker - МКС карта трекинг_files/imgs8.png" draggable="false"
+                                        <img src="./imgs/imgs8.png" draggable="false"
                                              style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 68px; height: 67px;">
                                     </div></span><label style="vertical-align: middle; cursor: pointer;">Labels</label>
                                 </div>
@@ -578,7 +403,7 @@
                            title="Click to see this area on Google Maps"
                            style="position: static; overflow: visible; float: none; display: inline;">
                             <div style="width: 66px; height: 26px; cursor: pointer;"><img
-                                    src="./ISS Tracker - МКС карта трекинг_files/google_white5.png" draggable="false"
+                                    src="./imgs/google_white5.png" draggable="false"
                                     style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
                             </div>
                         </a></div>
@@ -586,8 +411,7 @@
             </div>
         </div>
     </div>
-    <br>
-</center>
+    </section>
+</article>
 
-</body>
-</html>
+
