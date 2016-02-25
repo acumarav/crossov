@@ -1,5 +1,4 @@
-var _0xc19f = ["", 
-"PI",
+var _0xc19f = ["", "PI",
 " ", 
 "split", 
 "trim_vector", 
@@ -981,10 +980,11 @@ function imagesReady() {
     loadTle(tleReady, tleError)
 }
 function imagesError() {
-    var _0xbf08x99 = document[_0xc19f[171]](_0xc19f[170]);
-    _0xbf08x99[_0xc19f[172]] = _0xc19f[173];
-    _0xbf08x99[_0xc19f[175]][_0xc19f[174]] = _0xc19f[176];
+    var errMsg = document.getElementById(_0xc19f[170]);
+    errMsg[_0xc19f[172]] = _0xc19f[173];
+    errMsg[_0xc19f[175]][_0xc19f[174]] = _0xc19f[176];
 }
+
 function loadTle(_0xbf08x94, _0xbf08x95) {
     isst_xmlhttp = new XMLHttpRequest();
     var onreadystatechange = _0xc19f[177];
@@ -1025,8 +1025,8 @@ function tleReady(_0xbf08x9c) {
 }
 function startTracker() {
     clearTimeout(tc);
-    document[_0xc19f[171]](_0xc19f[190])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[176];
-    document[_0xc19f[171]](_0xc19f[191])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[192];
+    document.getElementById(_0xc19f[190])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[176];
+    document.getElementById(_0xc19f[191])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[192];
     issTrackerResize();
     if (!map) {
         //initializeMap()
@@ -1036,27 +1036,27 @@ function startTracker() {
 }
 function printData() {
     var _0xbf08xa0 = _0xc19f[193];
-    document[_0xc19f[171]](_0xc19f[194])[_0xc19f[172]] = SGP4[_0xc19f[112]];
-    document[_0xc19f[171]](_0xc19f[195])[_0xc19f[172]] = SGP4[_0xc19f[115]];
-    document[_0xc19f[171]](_0xc19f[196])[_0xc19f[172]] = SGP4[_0xc19f[118]];
-    document[_0xc19f[171]](_0xc19f[197])[_0xc19f[172]] = SGP4[_0xc19f[123]];
-    document[_0xc19f[171]](_0xc19f[198])[_0xc19f[172]] = SGP4[_0xc19f[126]];
+    document.getElementById(_0xc19f[194])[_0xc19f[172]] = SGP4[_0xc19f[112]];
+    document.getElementById(_0xc19f[195])[_0xc19f[172]] = SGP4[_0xc19f[115]];
+    document.getElementById(_0xc19f[196])[_0xc19f[172]] = SGP4[_0xc19f[118]];
+    document.getElementById(_0xc19f[197])[_0xc19f[172]] = SGP4[_0xc19f[123]];
+    document.getElementById(_0xc19f[198])[_0xc19f[172]] = SGP4[_0xc19f[126]];
     var _0xbf08xa1 = isDocumentInFullScreenMode();
-    document[_0xc19f[171]](_0xc19f[199])[_0xc19f[175]][_0xc19f[174]] = (_0xbf08xa1) ? _0xc19f[192] : _0xc19f[176];
-    document[_0xc19f[171]](_0xc19f[200])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[192];
+    document.getElementById(_0xc19f[199])[_0xc19f[175]][_0xc19f[174]] = (_0xbf08xa1) ? _0xc19f[192] : _0xc19f[176];
+    document.getElementById(_0xc19f[200])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[192];
     var _0xbf08xa2 = 0;
     if (SGP4[_0xc19f[119]] != 1.0) {
         _0xbf08xa2 = isst_map_h * 0.04
     }
     ;
-    document[_0xc19f[171]](_0xc19f[202])[_0xc19f[175]][_0xc19f[201]] = _0xbf08xa2 + _0xc19f[203];
+    document.getElementById(_0xc19f[202])[_0xc19f[175]][_0xc19f[201]] = _0xbf08xa2 + _0xc19f[203];
     if (!isDocumentInFullScreenMode()) {
         setLatLon(SGP4.Latitude, SGP4.Longitude)
     }
     ;
 }
 function tleError() {
-    var _0xbf08x99 = document[_0xc19f[171]](_0xc19f[170]);
+    var _0xbf08x99 = document.getElementById(_0xc19f[170]);
     _0xbf08x99[_0xc19f[172]] = _0xc19f[204];
     _0xbf08x99[_0xc19f[175]][_0xc19f[174]] = _0xc19f[176];
 }
@@ -1072,28 +1072,28 @@ function issTrackerResize() {
         return
     }
     ;
-    isst_map_w = (!isDocumentInFullScreenMode()) ? document[_0xc19f[171]](_0xc19f[208])[_0xc19f[207]] : screen[_0xc19f[209]];
+    isst_map_w = (!isDocumentInFullScreenMode()) ? document.getElementById(_0xc19f[208])[_0xc19f[207]] : screen[_0xc19f[209]];
     isst_map_h = Math[_0xc19f[120]](isst_map_w * 0.5);
     document[_0xc19f[211]][_0xc19f[175]][_0xc19f[210]] = (isst_map_h * 0.03) + _0xc19f[203];
-    var _0xbf08xaa = document[_0xc19f[171]](_0xc19f[212]);
+    var _0xbf08xaa = document.getElementById(_0xc19f[212]);
     while (_0xbf08xaa[_0xc19f[213]]) {
         _0xbf08xaa[_0xc19f[214]](_0xbf08xaa[_0xc19f[213]])
     }
     ;
-    document[_0xc19f[171]](_0xc19f[212])[_0xc19f[172]] = _0xc19f[215] + isst_map_w + _0xc19f[216] + isst_map_h + _0xc19f[217];
-    document[_0xc19f[171]](_0xc19f[212])[_0xc19f[175]][_0xc19f[218]] = isst_map_h + _0xc19f[203];
-    var _0xbf08x99 = document[_0xc19f[171]](_0xc19f[219]);
+    document.getElementById(_0xc19f[212])[_0xc19f[172]] = _0xc19f[215] + isst_map_w + _0xc19f[216] + isst_map_h + _0xc19f[217];
+    document.getElementById(_0xc19f[212])[_0xc19f[175]][_0xc19f[218]] = isst_map_h + _0xc19f[203];
+    var _0xbf08x99 = document.getElementById(_0xc19f[219]);
     _0xbf08x99[_0xc19f[175]][_0xc19f[218]] = (isst_map_w * 0.0624) + _0xc19f[203];
-    var _0xbf08x99 = document[_0xc19f[171]](_0xc19f[200]);
+    var _0xbf08x99 = document.getElementById(_0xc19f[200]);
     _0xbf08x99[_0xc19f[175]][_0xc19f[218]] = (isst_map_w * 0.0624) + _0xc19f[203];
     var _0xbf08xab = isst_map_h * 0.04;
-    _0xbf08x99 = document[_0xc19f[171]](_0xc19f[220]);
+    _0xbf08x99 = document.getElementById(_0xc19f[220]);
     _0xbf08x99[_0xc19f[175]][_0xc19f[209]] = (2 * _0xbf08xab) + _0xc19f[203];
     _0xbf08x99[_0xc19f[175]][_0xc19f[218]] = (_0xbf08xab) + _0xc19f[203];
-    _0xbf08x99 = document[_0xc19f[171]](_0xc19f[202]);
+    _0xbf08x99 = document.getElementById(_0xc19f[202]);
     _0xbf08x99[_0xc19f[175]][_0xc19f[209]] = (_0xbf08xab) + _0xc19f[203];
     _0xbf08x99[_0xc19f[175]][_0xc19f[218]] = (_0xbf08xab) + _0xc19f[203];
-    _0xbf08x99 = document[_0xc19f[171]](_0xc19f[199]);
+    _0xbf08x99 = document.getElementById(_0xc19f[199]);
     _0xbf08x99[_0xc19f[175]][_0xc19f[218]] = (isst_map_h * 0.06) + _0xc19f[203];
     var _0xbf08xa1 = isDocumentInFullScreenMode();
     _0xbf08x99[_0xc19f[175]][_0xc19f[174]] = (_0xbf08xa1) ? _0xc19f[192] : _0xc19f[176];
@@ -1102,20 +1102,20 @@ function issTrackerResize() {
         _0xbf08xa2 = isst_map_h * 0.04
     }
     ;
-    document[_0xc19f[171]](_0xc19f[202])[_0xc19f[175]][_0xc19f[201]] = _0xbf08xa2 + _0xc19f[203];
+    document.getElementById(_0xc19f[202])[_0xc19f[175]][_0xc19f[201]] = _0xbf08xa2 + _0xc19f[203];
     var _0xbf08xac = ((isDocumentInFullScreenMode()) ? ((screen[_0xc19f[218]] - isst_map_w / 16.0 * 9.0) * 0.5) : 0) + _0xc19f[203];
-    document[_0xc19f[171]](_0xc19f[221])[_0xc19f[175]][_0xc19f[218]] = _0xbf08xac;
-    document[_0xc19f[171]](_0xc19f[222])[_0xc19f[175]][_0xc19f[218]] = _0xbf08xac;
+    document.getElementById(_0xc19f[221])[_0xc19f[175]][_0xc19f[218]] = _0xbf08xac;
+    document.getElementById(_0xc19f[222])[_0xc19f[175]][_0xc19f[218]] = _0xbf08xac;
     if (!isDocumentInFullScreenMode()) {		
 	debugger;
-        //document[_0xc19f[171]](_0xc19f[223])[_0xc19f[175]][_0xc19f[218]] = (220.0 / 920.0 * isst_map_w) + _0xc19f[203];
+        //document.getElementById(_0xc19f[223])[_0xc19f[175]][_0xc19f[218]] = (220.0 / 920.0 * isst_map_w) + _0xc19f[203];
 		//document.getElementById('map_canvas').style.height = (220.0 / 920.0 * isst_map_w) + 'px';
     };
-    _0xbf08x99 = document[_0xc19f[171]](_0xc19f[191]);
+    _0xbf08x99 = document.getElementById(_0xc19f[191]);
     _0xbf08x99[_0xc19f[175]][_0xc19f[224]] = ((isDocumentInFullScreenMode()) ? screen[_0xc19f[209]] : 920) + _0xc19f[203];
     _0xbf08x99[_0xc19f[175]][_0xc19f[209]] = isst_map_w + _0xc19f[203];
     _0xbf08x99[_0xc19f[175]][_0xc19f[218]] = (isst_map_w * 9.0 / 16.0) + _0xc19f[203];
-    ctx = document[_0xc19f[171]](_0xc19f[227])[_0xc19f[226]](_0xc19f[225]);
+    ctx = document.getElementById(_0xc19f[227])[_0xc19f[226]](_0xc19f[225]);
     redrawTracker(true);
 }
 var iss_old_x = 0;
@@ -1233,7 +1233,7 @@ function calculateSunPosition() {
     SunLatDeg = SunLat * 180.0 / Math[_0xc19f[1]];
 }
 function manageFullScreen() {
-    var _0xbf08xc3 = document[_0xc19f[171]](_0xc19f[208]);
+    var _0xbf08xc3 = document.getElementById(_0xc19f[208]);
     if (_0xbf08xc3[_0xc19f[262]]) {
         _0xbf08xc3[_0xc19f[262]]()
     } else {
@@ -1540,7 +1540,7 @@ function redrawTrackerTimed() {
         clearTimeout(tc)
     }
     ;
-    if (document[_0xc19f[171]](_0xc19f[190])[_0xc19f[175]][_0xc19f[174]] == _0xc19f[192]) {
+    if (document.getElementById(_0xc19f[190])[_0xc19f[175]][_0xc19f[174]] == _0xc19f[192]) {
         return
     }
     ;
@@ -1565,8 +1565,8 @@ function changeMetric() {
         SGP4[_0xc19f[282]]()
     }
     ;
-    document[_0xc19f[171]](_0xc19f[202])[_0xc19f[175]][_0xc19f[201]] = _0xbf08xa2 + _0xc19f[203];
-    document[_0xc19f[171]](_0xc19f[200])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[176];
+    document.getElementById(_0xc19f[202])[_0xc19f[175]][_0xc19f[201]] = _0xbf08xa2 + _0xc19f[203];
+    document.getElementById(_0xc19f[200])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[176];
 }
 var marker = null;
 var map = null;
@@ -1586,31 +1586,31 @@ function initializeMap() {
 console.log('init map');
     //var _0xbf08x110 = new google[_0xc19f[283]].LatLng(0, 0);
     //var _0xbf08x112 = {zoom: 5, center: _0xbf08x110, mapTypeId: google[_0xc19f[283]][_0xc19f[287]][_0xc19f[286]]};
-    //map = new google[_0xc19f[283]].Map(document[_0xc19f[171]](_0xc19f[223]), _0xbf08x112);
+    //map = new google[_0xc19f[283]].Map(document.getElementById(_0xc19f[223]), _0xbf08x112);
     //marker = new google[_0xc19f[283]].Marker({position: _0xbf08x110, map: map, title: _0xc19f[288]});
     //map[_0xc19f[289]] = false;
     //map[_0xc19f[290]] = true;
 }
 function showCover() {
-    isst_map_w = (!isDocumentInFullScreenMode()) ? document[_0xc19f[171]](_0xc19f[190])[_0xc19f[207]] : screen[_0xc19f[209]];
+    isst_map_w = (!isDocumentInFullScreenMode()) ? document.getElementById(_0xc19f[190])[_0xc19f[207]] : screen[_0xc19f[209]];
     isst_map_h = Math[_0xc19f[120]](isst_map_w * 9.0 / 16.0);
     var _0xbf08x114 = isst_map_h;
-    document[_0xc19f[171]](_0xc19f[190])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[192];
-    document[_0xc19f[171]](_0xc19f[191])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[176];
-    document[_0xc19f[171]](_0xc19f[190])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[192];
+    document.getElementById(_0xc19f[190])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[192];
+    document.getElementById(_0xc19f[191])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[176];
+    document.getElementById(_0xc19f[190])[_0xc19f[175]][_0xc19f[174]] = _0xc19f[192];
 }
 function issTracker_init() {
 
     showCover();
     if (!!document[_0xc19f[292]](_0xc19f[291])[_0xc19f[226]]) {
-        var _0xbf08x99 = document[_0xc19f[171]](_0xc19f[191]);
+        var _0xbf08x99 = document.getElementById(_0xc19f[191]);
         _0xbf08x99[_0xc19f[175]][_0xc19f[218]] = (_0xbf08x99[_0xc19f[207]] * 9.0 / 16.0) + _0xc19f[203];
         canDraw = true;
         isst_ready = false;
         isst_ld_progress = isst_ld_steps = 0;
         loadImages(imagesReady, imagesError);
     } else {
-        var _0xbf08x99 = document[_0xc19f[171]](_0xc19f[170]);
+        var _0xbf08x99 = document.getElementById(_0xc19f[170]);
         _0xbf08x99[_0xc19f[172]] = _0xc19f[293];
         _0xbf08x99[_0xc19f[175]][_0xc19f[174]] = _0xc19f[176];
     }
