@@ -16,71 +16,40 @@
             <div id="isst_ls" style="height: 460px; background-color: rgb(34, 34, 34);">
                 <canvas id="isst_map" style="z-index:0;" width="920" height="460"></canvas>
             </div>
-            <div id="isst_dt" style="height: 57.408px; background-color: rgb(0, 84, 159);">
-                <table height="100%" cellspacing="0" cellpadding="0" border="0">
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div class="isst_cl">Latitude</div>
-                            <div id="isst_lat" class="isst_cd">51,0 S</div>
-                        </td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>
-                            <div class="isst_cl">Longitude</div>
-                            <div id="isst_lon" class="isst_cd">53,0 E</div>
-                        </td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>
-                            <div class="isst_cl">Height</div>
-                            <div id="isst_alt" class="isst_cd">425 km</div>
-                        </td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>
-                            <div class="isst_cl">Speed</div>
-                            <div id="isst_spd" class="isst_cd">27553 km/h</div>
-                        </td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>
-                            <div class="isst_cl">Time (GMT)</div>
-                            <div id="isst_tim" class="isst_cd">28 Jan 2016, 07:49:20</div>
-                        </td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>&nbsp;&nbsp;&nbsp;</td>
-                        <td>
-                            <table cellspacing="0" cellpadding="0" border="0">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        Metric / Imperial&nbsp;&nbsp;
-                                    </td>
-                                    <td>
-                                        <div id="btn_metric" onclick="javascript:changeMetric();"
-                                             style="width: 36.8px; height: 18.4px;">
-                                            <div id="btn_metric2"
-                                                 style="width: 18.4px; height: 18.4px; left: 0px;"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>
-                            <div onclick="javascript:manageFullScreen();"><img id="btn_fs"
-                                                                               src="./imgs/fullscreen.png"
-                                                                               style="height: 27.6px; display: block;">
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div id="waitmsg" style="height: 57.408px; display: none;">
-                    <div><br>Prease wait</div>
+
+            <div id="isst_dt" style="background-color: rgb(0, 84, 159);">
+                <div class="isst_cl">Latitude</div>
+                <div id="isst_lat" class="isst_cd">51,0 S</div>
+
+                <div class="isst_cl">Longitude</div>
+                <div id="isst_lon" class="isst_cd">53,0 E</div>
+
+                <div class="isst_cl">Height</div>
+                <div id="isst_alt" class="isst_cd">425 km</div>
+
+                <div class="isst_cl">Time (GMT)</div>
+                <div id="isst_tim" class="isst_cd">28 Jan 2016, 07:49:20</div>
+
+                <div class="isst_cl">Speed</div>
+                <div id="isst_spd" class="isst_cd">27553 km/h</div>
+
+                <div>Metric / Imperial</div>
+                <div id="btn_metric" onclick="javascript:changeMetric();"
+                     style="width: 36.8px; height: 18.4px;">
+                    <div id="btn_metric2"
+                         style="width: 18.4px; height: 18.4px; left: 0px;"></div>
                 </div>
+
+                <div onclick="javascript:manageFullScreen();"><img id="btn_fs"
+                                                                   src="./imgs/fullscreen.png"
+                                                                   style="height: 27.6px; display: block;">
+                </div>
+                <div id="waitmsg" style="height: 57.408px; display: none;">
+                    <div>Prease wait</div>
+                </div>
+
             </div>
+
             <div id="isstgap2" style="height: 0px;">&nbsp;</div>
         </div>        
     </div>    
