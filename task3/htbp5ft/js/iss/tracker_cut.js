@@ -1070,8 +1070,7 @@ var canDraw = false;
 function issTrackerResize() {
     if (!canDraw) {
         return
-    }
-    ;
+    };
     isst_map_w = (!isDocumentInFullScreenMode()) ? document.getElementById(_0xc19f[208])[_0xc19f[207]] : screen[_0xc19f[209]];
     isst_map_h = Math[_0xc19f[120]](isst_map_w * 0.5);
     document[_0xc19f[211]][_0xc19f[175]][_0xc19f[210]] = (isst_map_h * 0.03) + _0xc19f[203];
