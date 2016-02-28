@@ -13,8 +13,8 @@
         <div id="isst" style="display: block;">
             <div id="isstwp">
                 <div id="isstgap" style="height: 0px;">&nbsp;</div>
-                <div id="isst_ls" style="height: 460px; background-color: rgb(34, 34, 34);">
-                    <canvas id="isst_map" style="z-index:0;" width="920" height="460"></canvas>
+                <div id="isst_ls" style="height:600px; background-color: rgb(34, 34, 34);">
+                    <canvas id="isst_map" style="z-index:0;" width="1200" height="600"></canvas>
                 </div>
 
                 <div id="isst_dt" style="background-color: rgb(0, 84, 159);">
