@@ -1,13 +1,13 @@
 
-<article>
+<article class="fullwidth">
     <header>
         <script type="text/javascript" src="./js/iss/tracker_cut.js"></script>
         <!--<script type="text/javascript" charset="UTF-8" src="./js/iss/common.js"></script>-->
         <script type="text/javascript" src="./js/iss/issviewinit.js"></script>
     </header>
 
-    <section>
-        <div id="cover" style="display: none; height: 517.5px; max-width: 920px; width: 920px;">
+    <section >
+        <div id="cover">
             <div id="errmsg"></div>
         </div>
         <div id="isst" style="display: block;">

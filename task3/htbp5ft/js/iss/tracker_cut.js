@@ -1280,12 +1280,10 @@ function setLatLon(_0xbf08x106, _0xbf08x104) {
     //var _0xbf08x110 = new google["maps"].LatLng(_0xbf08x106, _0xbf08x104);
     //if (map) {
     //    map["panTo"](_0xbf08x110)
-    //}
-    ;
+    //};
     //if (marker) {
     //    marker["setPosition"](_0xbf08x110)
-    //}
-    ;
+    //};
     return 1;
 }
 function initializeMap() {

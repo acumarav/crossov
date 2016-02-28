@@ -241,6 +241,11 @@ nav a:hover {
     WIDE: Main
    ============ */
 
+    .main article.fullwidth {
+        width: 100%;
+        float:left;
+    }
+
     .main article {
         float: left;
         width: 57%;
