@@ -803,15 +803,15 @@ function issTrackerResize() {
     waitmsg["style"]["height"] = (isst_map_h * 0.06) + "px";
     var isFullScreen = isDocumentInFullScreenMode();
     waitmsg["style"]["display"] = (isFullScreen) ? "none" : "block";
-    var _0xbf08xa2 = 0;
+    var _btnMetric2LeftOffset = 0;
     if (SGP4["kUnits"] != 1.0) {
-        _0xbf08xa2 = isst_map_h * 0.04
+        _btnMetric2LeftOffset = isst_map_h * 0.04
     }
     ;
-    document.getElementById("btn_metric2")["style"]["left"] = _0xbf08xa2 + "px";
-    var _0xbf08xac = ((isDocumentInFullScreenMode()) ? ((screen["height"] - isst_map_w / 16.0 * 9.0) * 0.5) : 0) + "px";
-    document.getElementById("isstgap")["style"]["height"] = _0xbf08xac;
-    document.getElementById("isstgap2")["style"]["height"] = _0xbf08xac;
+    document.getElementById("btn_metric2")["style"]["left"] = _btnMetric2LeftOffset + "px";
+    var _height = ((isDocumentInFullScreenMode()) ? ((screen["height"] - isst_map_w / 16.0 * 9.0) * 0.5) : 0) + "px";
+    document.getElementById("isstgap")["style"]["height"] = _height;
+    document.getElementById("isstgap2")["style"]["height"] = _height;
     if (!isDocumentInFullScreenMode()) {
         debugger;
         //document.getElementById("map_canvas")["style"]["height"] = (220.0 / 920.0 * isst_map_w) + "px";
@@ -1309,8 +1309,9 @@ function issTracker_init() {
 
     showCover();
     if (!!document["createElement"]("canvas")["getContext"]) {
-        var conver = document.getElementById("cover");
-        conver["style"]["height"] = (conver["offsetWidth"] * 9.0 / 16.0) + "px";
+        var cover = document.getElementById("cover");
+        debugger;
+        cover["style"]["height"] = (cover["offsetWidth"] * 9.0 / 16.0) + "px";
         canDraw = true;
         isst_ready = false;
         isst_ld_progress = isst_ld_steps = 0;
