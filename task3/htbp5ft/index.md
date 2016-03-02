@@ -3,7 +3,7 @@
     <header>
         <script type="text/javascript" src="./js/iss/tracker_cut.js"></script>
         <!--<script type="text/javascript" charset="UTF-8" src="./js/iss/common.js"></script>-->
-        <!--<script type="text/javascript" src="./js/iss/issviewinit.js"></script>-->
+        <script type="text/javascript" src="./js/iss/issviewinit.js"></script>
     </header>
 
     <section >

@@ -1269,8 +1269,8 @@ function changeMetric() {
         _0xbf08xa2 = isst_map_h * 0.04;
     } else {
         SGP4["setMetric"]()
-    }
-    ;
+    };
+
     document.getElementById("btn_metric2")["style"]["left"] = _0xbf08xa2 + "px";
     document.getElementById("waitmsg")["style"]["display"] = "block";
 }
