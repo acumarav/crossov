@@ -813,7 +813,7 @@ function issTrackerResize() {
     document.getElementById("isstgap")["style"]["height"] = _height;
     document.getElementById("isstgap2")["style"]["height"] = _height;
     if (!isDocumentInFullScreenMode()) {
-        debugger;
+        //debugger;
         //document.getElementById("map_canvas")["style"]["height"] = (220.0 / 920.0 * isst_map_w) + "px";
         //document.getElementById('map_canvas').style.height = (220.0 / 920.0 * isst_map_w) + 'px';
     };
@@ -1308,7 +1308,7 @@ function issTracker_init() {
     showCover();
     if (!!document["createElement"]("canvas")["getContext"]) {
         var cover = document.getElementById("cover");
-        debugger;
+        //debugger;
         cover["style"]["height"] = (cover["offsetWidth"] * 9.0 / 16.0) + "px";
         canDraw = true;
         isst_ready = false;
