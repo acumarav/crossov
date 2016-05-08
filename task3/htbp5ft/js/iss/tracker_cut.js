@@ -695,11 +695,12 @@ function imagesError() {
 function loadTle(_0xbf08x94, _0xbf08x95) {
     isst_xmlhttp = new XMLHttpRequest();
     var onreadystatechange = "onreadystatechange";
-    console.log(onreadystatechange);
     console.log("readyState");
     isst_xmlhttp[onreadystatechange] = function () {
-        var text = "28-02-2016 16:00:02 ISS (ZARYA)\n1 25544U 98067A   16058.57831793  .00006322  00000-0  10205-3 0  9997\n2 25544  51.6418 249.6253 0003966 172.2334 290.5786 15.54294669987770";
-        _0xbf08x94(text);
+        //local hack
+        //var text = "28-02-2016 16:00:02 ISS (ZARYA)\n1 25544U 98067A   16058.57831793  .00006322  00000-0  10205-3 0  9997\n2 25544  51.6418 249.6253 0003966 172.2334 290.5786 15.54294669987770";
+        //_0xbf08x94(text);
+        debugger;
         if (isst_xmlhttp["readyState"] == 4) {
             switch (isst_xmlhttp['status']) {
                 case 0:
@@ -715,11 +716,11 @@ function loadTle(_0xbf08x94, _0xbf08x95) {
             }
         }
     };
-//isst_xmlhttp.open('GET','http://space.utema.ru/frame/esa-iss-tracker/tledata.txt'+'?r='+Date.now());
-    isst_xmlhttp.open('GET', "http://localhost:8080/tledata.txt" + '?r=' + Date.now());
-
-    isst_xmlhttp['send']();
+    //isst_xmlhttp.open('GET', "http://www.issview.info/tledata/tle" );
+    isst_xmlhttp.open('GET', "http://localhost:8080/tledata/tle" );
+    isst_xmlhttp.send();
 }
+
 function tleReady(_0xbf08x9c) {
     var _0xbf08x9d = _0xbf08x9c["split"]("\x0A");
     isst_tle["sat"] = _0xbf08x9d[0];
