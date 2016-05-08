@@ -716,8 +716,7 @@ function loadTle(_0xbf08x94, _0xbf08x95) {
             }
         }
     };
-    //isst_xmlhttp.open('GET', "http://www.issview.info/tledata/tle" );
-    isst_xmlhttp.open('GET', "http://localhost:8080/tledata/tle" );
+    isst_xmlhttp.open('GET', "http://www.issview.info/tledata/tle" );
     isst_xmlhttp.send();
 }
 
