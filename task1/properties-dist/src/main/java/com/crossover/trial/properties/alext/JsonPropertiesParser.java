@@ -4,9 +4,9 @@ import com.amazonaws.util.json.JSONException;
 import com.amazonaws.util.json.JSONObject;
 import org.apache.commons.io.IOUtils;
 
-import javax.script.ScriptException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,9 +26,9 @@ public class JsonPropertiesParser {
         return content;
     }*/
 
-    public Map<String, String> parse(InputStream ins) throws IOException, ScriptException, JSONException {
+    public Map<String, String> parse(InputStream ins) throws IOException, JSONException {
 
-        String rawjs = IOUtils.toString(ins);
+        String rawjs = IOUtils.toString(ins, StandardCharsets.UTF_8);
         JSONObject jso = new JSONObject(rawjs);
 
         HashMap<String, String> map = new HashMap<>();
